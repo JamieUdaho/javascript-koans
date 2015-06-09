@@ -89,6 +89,8 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
+
+
     expect(ingredientCount['mushrooms']).toBe(2);
   });
 
@@ -97,7 +99,31 @@ describe("About Applying What We Have Learnt", function() {
 
 
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+
+    var ingredientCount = _(products).chain()
+                .map(function(x) {return x.ingredients;})
+                .flatten()
+                .reduce(function(finalObject, ingredient) {
+                  if (ingredient in finalObject) {
+                    finalObject[ingredient] += 1;
+                  }
+                  else {
+                    finalObject[ingredient] = 1;
+                  }
+
+                  return finalObject;
+                }, {})
+                .value();
+
+    console.log(ingredientCount);
+
+
+
+
+
+    /* chain() together map(), flatten() and reduce() */
+
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
